@@ -92,6 +92,7 @@ const Login = () => {
 
       localStorage.setItem("token", JSON.stringify(data.token));
       localStorage.setItem("user", JSON.stringify(data.user.email))
+      localStorage.setItem("id", JSON.stringify(data.user.id))
       navigate('/dashboard');
       
       navigate("/dashboard");

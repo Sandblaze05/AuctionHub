@@ -18,6 +18,7 @@ const AuctionForm = ({ onSubmit }) => {
       startingBid: parseFloat(startingBid),
       currentPrice: parseFloat(startingBid),
       endTime: new Date(auctionEndTime).toISOString(),
+      id: JSON.parse(localStorage.getItem("user"))
     });
     setItemName("");
     setDescription("");

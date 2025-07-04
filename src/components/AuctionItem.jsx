@@ -75,7 +75,7 @@ const AuctionItem = ({ item, onBid }) => {
               Current Bid
             </p>
             <p className="text-xl font-bold">
-              ₹{item.currentPrice?.toFixed(2) ?? "0.00"}
+              ₹{item.currentBid?.toFixed(2) ?? "0.00"}
             </p>
           </div>
           <div>
@@ -83,7 +83,7 @@ const AuctionItem = ({ item, onBid }) => {
               Highest Bidder
             </p>
             <p className="text-xl font-bold">
-              {item.highestBidder?.username || "None"}
+              {item?.lastBidder || "None"}
             </p>
           </div>
         </div>
@@ -130,7 +130,7 @@ const AuctionItem = ({ item, onBid }) => {
         {isEnded && (
           <div className="mt-6 text-center text-xl font-bold text-red-600 dark:text-red-400 border-t pt-4 border-gray-200 dark:border-gray-700">
             Auction has ended. Winner:{" "}
-            {item.highestBidder?.username || "None"}
+            {item?.lastBidder || "None"}
           </div>
         )}
       </div>

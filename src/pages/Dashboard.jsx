@@ -69,8 +69,9 @@ const Dashboard = () => {
 
   const handleBid = (itemId, bidAmount, maxBid) => {
     if (socket) {
-      const user = JSON.parse(localStorage.getItem("user"));
-      socket.emit("placeBid", { itemId, bidAmount, maxBid, userId: user.id });
+      const userId = JSON.parse(localStorage.getItem("user"));
+      console.log(bidAmount);
+      socket.emit("placeBid", { itemId, bidAmount, maxBid, userId });
     }
     else {
         console.warn('socket not connected');

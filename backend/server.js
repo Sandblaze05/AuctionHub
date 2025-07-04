@@ -37,9 +37,13 @@ io.on("connection", (socket) => {
   socket.on("createItem", (item) => {
     const newItem = {
       ...item,
-      id: Date.now().toString(), // simple unique ID
+      id: item.id,
       currentBid: Number(item.startingBid),
-      status: "active"
+      status: "active",
+      name: item.name,
+      description: item.description,
+      startingBid: Number(item.startingBid),
+      endTime: item.endTime
     };
 
     items.push(newItem);
@@ -51,6 +55,7 @@ io.on("connection", (socket) => {
     if (index !== -1 && bidAmount > items[index].currentBid) {
       items[index].currentBid = bidAmount;
       items[index].lastBidder = userId;
+      console.log(items[index]);
       io.emit("updateItem", items[index]);
     }
   });
