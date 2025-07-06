@@ -17,6 +17,7 @@ app.use("/api/auth", authRoutes);
 
 
 let items = []; // In-memory storage for now
+let autoBidder = [];
 
 app.get("/items", (req, res) => {
   res.json(items);
@@ -56,7 +57,21 @@ io.on("connection", (socket) => {
       items[index].currentBid = bidAmount;
       items[index].lastBidder = userId;
       console.log(items[index]);
+      if (maxBid) {
+        autoBidder.push({ itemId, maxBid, userId });
+      }
       io.emit("updateItem", items[index]);
+      if (autoBidder.length > 0) {
+        autoBidder.forEach((bidder) => {
+          if (bidder.itemId === itemId && bidAmount < bidder.maxBid) {
+            const newBid = Math.min(bidder.maxBid, items[index].currentBid + 1);
+            items[index].currentBid = newBid;
+            items[index].lastBidder = bidder.userId;
+            io.emit("updateItem", items[index]);
+            console.log(`Auto-bid placed for item ${itemId} by user ${bidder.userId}`);
+          }
+        });
+      }
     }
   });
 

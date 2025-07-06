@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronRight, Users, Trophy, Clock, Star } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { ChevronRight, Users, Trophy, Clock, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const [currentBid, setCurrentBid] = useState(1250);
@@ -11,13 +11,13 @@ const Hero = () => {
 
   useEffect(() => {
     setIsVisible(true);
-    
+
     const bidInterval = setInterval(() => {
-      setCurrentBid(prev => prev + Math.floor(Math.random() * 50) + 10);
+      setCurrentBid((prev) => prev + Math.floor(Math.random() * 50) + 10);
     }, 3000);
-    
+
     const timeInterval = setInterval(() => {
-      setTimeLeft(prev => prev > 0 ? prev - 1 : 0);
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
 
     return () => {
@@ -30,13 +30,15 @@ const Hero = () => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    return `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   const stats = [
     { icon: Users, value: "10K+", label: "Active Bidders" },
     { icon: Trophy, value: "500+", label: "Auctions Won" },
-    { icon: Star, value: "4.9", label: "User Rating" }
+    { icon: Star, value: "4.9", label: "User Rating" },
   ];
 
   return (
@@ -50,20 +52,30 @@ const Hero = () => {
 
       <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between px-6 lg:px-20 py-12 lg:py-20 min-h-screen">
         {/* Left Content */}
-        <div className={`max-w-2xl transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
+        <div
+          className={`max-w-2xl transform transition-all duration-1000 ${
+            isVisible
+              ? "translate-x-0 opacity-100"
+              : "-translate-x-10 opacity-0"
+          }`}
+        >
           <div className="inline-flex items-center px-4 py-2 bg-purple-500/20 backdrop-blur-sm rounded-full border border-purple-500/30 mb-6">
-            <span className="text-purple-300 text-sm font-medium">🔥 Live Auctions Available</span>
+            <span className="text-purple-300 text-sm font-medium">
+              🔥 Live Auctions Available
+            </span>
           </div>
-          
+
           <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
             Bid. Win.{" "}
             <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
               Celebrate.
             </span>
           </h1>
-          
+
           <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-            Welcome to AuctionHub – your ultimate destination for real-time bidding and unbeatable deals. Join thousands of bidders and grab your dream item today!
+            Welcome to AuctionHub – your ultimate destination for real-time
+            bidding and unbeatable deals. Join thousands of bidders and grab
+            your dream item today!
           </p>
 
           {/* Stats */}
@@ -73,7 +85,9 @@ const Hero = () => {
                 <div className="flex justify-center mb-2">
                   <stat.icon className="w-6 h-6 text-purple-400" />
                 </div>
-                <div className="text-2xl font-bold text-white">{stat.value}</div>
+                <div className="text-2xl font-bold text-white">
+                  {stat.value}
+                </div>
                 <div className="text-sm text-gray-400">{stat.label}</div>
               </div>
             ))}
@@ -81,13 +95,16 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            <button onClick={() => navigate('/signup')} className="group relative bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+            <button
+              onClick={() => navigate("/signup")}
+              className="group relative bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
               <span className="flex items-center justify-center">
                 Start Bidding Now
                 <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </button>
-            
+
             <button className="px-8 py-4 border-2 border-white/20 hover:border-white/40 text-white rounded-xl font-semibold transition-all duration-300 backdrop-blur-sm hover:bg-white/10">
               Browse Auctions
             </button>
@@ -111,7 +128,11 @@ const Hero = () => {
         </div>
 
         {/* Right Content - Interactive Auction Card */}
-        <div className={`w-full lg:w-1/2 mt-10 lg:mt-0 transform transition-all duration-1000 delay-500 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
+        <div
+          className={`w-full lg:w-1/2 mt-10 lg:mt-0 transform transition-all duration-1000 delay-500 ${
+            isVisible ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
+          }`}
+        >
           <div className="relative">
             {/* Main auction card */}
             <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300">
@@ -121,12 +142,16 @@ const Hero = () => {
                     <Trophy className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-white font-semibold text-lg">Premium Watch</h3>
+                    <h3 className="text-white font-semibold text-lg">
+                      Premium Watch
+                    </h3>
                     <p className="text-gray-400 text-sm">Luxury Collection</p>
                   </div>
                 </div>
                 <div className="bg-green-500/20 px-3 py-1 rounded-full">
-                  <span className="text-green-400 text-sm font-medium">Live</span>
+                  <span className="text-green-400 text-sm font-medium">
+                    Live
+                  </span>
                 </div>
               </div>
 
@@ -139,14 +164,18 @@ const Hero = () => {
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between items-center">
                   <span className="text-gray-400">Current Bid</span>
-                  <span className="text-2xl font-bold text-white">${currentBid.toLocaleString()}</span>
+                  <span className="text-2xl font-bold text-white">
+                    ₹{currentBid.toLocaleString()}
+                  </span>
                 </div>
-                
+
                 <div className="flex justify-between items-center">
                   <span className="text-gray-400">Time Left</span>
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-orange-400" />
-                    <span className="text-orange-400 font-mono">{formatTime(timeLeft)}</span>
+                    <span className="text-orange-400 font-mono">
+                      {formatTime(timeLeft)}
+                    </span>
                   </div>
                 </div>
 
@@ -158,7 +187,7 @@ const Hero = () => {
 
               {/* Bid button */}
               <button className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
-                Place Bid - ${(currentBid + 50).toLocaleString()}
+                Place Bid - ₹{(currentBid + 50).toLocaleString()}
               </button>
             </div>
 
@@ -172,7 +201,11 @@ const Hero = () => {
 
       {/* Bottom wave */}
       <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 120" className="w-full h-20 fill-white">
+        <svg
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          className="w-screen h-20 fill-white"
+        >
           <path d="M0,0 C720,100 720,100 1440,0 L1440,120 L0,120 Z"></path>
         </svg>
       </div>
