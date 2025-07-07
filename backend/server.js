@@ -9,8 +9,14 @@ import authRoutes from "./routes/authRoutes.js";
 dotenv.config();
 connectDB();
 
+const allowedOrigins = [process.env.FRONTEND_URL, "http://localhost:5173"];
+
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ["GET", "POST"],
+  credentials: true
+}));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
@@ -25,15 +31,24 @@ app.get("/items", (req, res) => {
 
 const server = http.createServer(app);
 
+
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST"]
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
+
 io.on("connection", (socket) => {
-  console.log("✅ New client connected:", socket.id);
+  console.log("New client connected:", socket.id);
 
   socket.on("createItem", (item) => {
     const newItem = {
