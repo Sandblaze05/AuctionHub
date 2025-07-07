@@ -13,19 +13,11 @@ const allowedOrigins = [process.env.FRONTEND_URL, "http://localhost:5173"];
 const app = express();
 
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-    methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"]
-  })
-);
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"]
+}));
+
 
 app.use(express.json());
 
@@ -42,15 +34,12 @@ app.get("/items", (req, res) => {
 
 const server = http.createServer(app);
 
-
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins,
-    methods: ["GET", "POST"],
-    credentials: true
+    origin: "*",
+    methods: ["GET", "POST"]
   }
 });
-
 
 
 io.on("connection", (socket) => {
