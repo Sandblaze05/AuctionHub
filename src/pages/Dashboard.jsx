@@ -5,8 +5,7 @@ import AuctionForm from "../components/AuctionForm";
 import AuctionItem from "../components/AuctionItem";
 import { ChevronLeft } from "lucide-react";
 
-// Replace with your server URL
-const SOCKET_SERVER_URL = "http://localhost:5000";
+const SOCKET_SERVER_URL = "https://auctionhub-ycv4.onrender.com";
 
 const Dashboard = () => {
   const [items, setItems] = useState([]);
